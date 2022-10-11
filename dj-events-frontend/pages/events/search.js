@@ -7,11 +7,13 @@ import { API_URL } from '@/config/index';
 export default function Search({ events }) {
   const router = useRouter();
 
+  console.log('☆', events);
+
   return (
     <Layout>
       <Link href="/events">Go Back</Link>
       <h1>Search Results for {router.query.term}</h1>
-      {events.lenght === 0 && <h3>No events to show</h3>}
+      {events.length === 0 && <h3>No events to show</h3>}
       {events.map((evt) => (
         <EventItem key={evt.id} evt={evt} />
       ))}
@@ -24,6 +26,8 @@ export async function getServerSideProps({ query: { term } }) {
   const res = await fetch(`${API_URL}/events?populate=*&${query}`);
 
   const events = await res.json();
+
+  console.log('★', events.data);
 
   return {
     props: { events: events.data },

@@ -8,7 +8,7 @@ import styles from '@/styles/Event.module.css';
 export default function Event(props) {
   const { id } = props.evt;
   const { attributes } = props.evt;
-  const imageUrl = attributes.image.data.attributes.formats.medium.url;
+  const imageUrl = attributes.image.data?.attributes.formats.medium.url;
 
   const deleteEvent = () => {
     console.log('delete');
@@ -33,7 +33,7 @@ export default function Event(props) {
           {attributes.time}
         </span>
         <h1>{attributes.name}</h1>
-        {attributes.image && (
+        {imageUrl && (
           <div className={styles.image}>
             <Image src={imageUrl} alt="Event" width={960} height={600} />
           </div>
